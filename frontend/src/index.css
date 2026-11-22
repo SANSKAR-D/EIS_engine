@@ -1,0 +1,173 @@
+/* frontend/src/index.css */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Emil Kowalski motion curves */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 280ms;
+
+  /* Paul Bakaus / Impeccable color tokens */
+  --bg-primary: #090a0f;
+  --bg-secondary: #10121a;
+  --bg-tertiary: #171924;
+  --bg-elevated: #1e2230;
+  --border-subtle: #242938;
+  --border-accent: #333a4d;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-blue: #3b82f6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #ef4444;
+  --accent-purple: #8b5cf6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Emil tactile button interactions */
+button, .clickable-chip {
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-tactile {
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.btn-tactile:hover {
+  transform: translateY(-1px);
+}
+
+.btn-tactile:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* Citation chip hover and active */
+.citation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+}
+
+.citation-chip:hover {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-1px);
+}
+
+.citation-chip:active {
+  transform: scale(0.97);
+}
+
+/* Exact verbatim quote highlight */
+mark.highlight-quote {
+  background-color: #fef08a; /* amber-200 */
+  color: #0f172a;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 3px;
+  border-left: 3px solid #eab308;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.3);
+}
+
+/* Drawer Animations */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  animation: fadeIn var(--duration-normal) var(--ease-out);
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 620px;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-accent);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.7);
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+  animation: drawerSlideIn var(--duration-slow) var(--ease-out);
+  overflow-y: auto;
+}
+
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(100%) scale(0.98);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Superseded text effect */
+.superseded-text {
+  text-decoration: line-through;
+  text-decoration-color: #ef4444;
+  text-decoration-thickness: 2px;
+  opacity: 0.65;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-accent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
